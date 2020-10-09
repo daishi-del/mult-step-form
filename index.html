@@ -258,10 +258,17 @@
             </div>
           </transition>
         </div>
-
+        <div class="text-center">
+          <ul style="color: red;">
+            <li v-for="error in errors">
+              {{error}}
+            </li>
+          </ul>
+        </div>
         <div v-if="formStep < 5" class="form_step_item">
           <span class="step_back" v-if="formStep > 1" @click="changeFormStep(-1)">戻る</span>
-          <span class="step" @click="changeFormStep(1)">次のステップへ</span>
+          <!-- <span class="step" @click="changeFormStep(1)">次のステップへ</span> -->
+          <span class="step" @click="validation()">次のステップへ</span>
         </div>
 
         <div v-else>
@@ -469,6 +476,7 @@
       new Vue({
         el: "#app",
         data: {
+          errors: [],
           seasons: [
             "良い求人があり次第",
             "一ヶ月以内",
@@ -547,6 +555,68 @@
           // 追加分
           changeFormStep(value) {
             this.formStep += value
+            this.errors = []
+          },
+          validation() {
+            this.errors = []
+
+            console.log(this.formStep)
+            if (this.formStep == 1) {
+              if (this.inputData.step1.work_style.length == 0) {
+                this.errors.push("ご希望の働き方を選択してください")
+              }
+              else if (this.inputData.step1.season == null) {
+                this.errors.push("ご希望の転職時期を選択してください")
+              }
+              else {
+                this.changeFormStep(1)
+              }
+
+            }
+            else if (this.formStep == 2) {
+              if (this.inputData.step2.length == 0) {
+                this.errors.push("いずれかを選択してください")
+              }
+              else {
+                this.changeFormStep(1)
+              }
+            }
+            else if (this.formStep == 3) {
+              if (this.inputData.step3.about_job == null) {
+                this.errors.push("現在の職務内容についていずれかを選択してください")
+              }
+              else if (this.inputData.step3.aspiring.length == 0) {
+                this.errors.push("ご希望の職種について選択してください")
+              }
+              else {
+                this.changeFormStep(1)
+              }
+            }
+            else if (this.formStep == 4) {
+              if (this.inputData.step4.prefecture == null) {
+                this.errors.push("お住まいの都道府県について選択してください")
+              }
+              else if (this.inputData.step4.city == null) {
+                this.errors.push("いずれかを選択してください")
+              }
+              else if (this.inputData.step4.info.name == "") {
+                this.errors.push("お名前をご記入ください")
+              }
+              else if (this.inputData.step4.info.birthday == null) {
+                this.errors.push("誕生年をご選択ください")
+              }
+              else {
+                this.changeFormStep(1)
+              }
+            }
+            else if (this.formStep == 5) {
+              if (this.inputData.step5.tel == "") {
+                this.errors.push("電話番号を入力してください")
+                return false
+              }
+            }
+
+
           },
           searchCity(prefecture) {
             console.log(prefecture)
