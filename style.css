@@ -97,6 +97,18 @@ body {
     text-align: center;
   }
 }
+@media screen and (max-width: 376px) {
+  body {
+    overflow-x: hidden !important;
+  }
+  .step,
+  .step_back {
+    font-size: 1rem;
+  }
+  .final {
+    font-size: 0.8rem !important;
+  }
+}
 
 .fade-enter-active,
 .fade-leave-active {
@@ -209,6 +221,7 @@ body {
   margin: 0 auto;
 }
 .step5 input {
+  margin-top: 10px;
   width: 100%;
 }
 

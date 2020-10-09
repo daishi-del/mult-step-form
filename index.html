@@ -74,195 +74,206 @@
 
         </ol>
         <div class="form-content">
-          <div v-if="formStep == 1">
-            <span class="need">必須</span><strong class="input_title">ご希望の働き方</strong>
-            <div class="group">
-              <div class="group-item">
-                <input type="checkbox" id="formal_1" value="正社員（夜勤可）" v-model="inputData.step1.work_style">
-                <label for="formal_1">正社員(夜勤可)</label>
+          <transition name="fade" mode="out-in">
+            <div v-if="formStep == 1">
+              <span class="need">必須</span><strong class="input_title">ご希望の働き方</strong>
+              <div class="group">
+                <div class="group-item">
+                  <input type="checkbox" id="formal_1" value="正社員（夜勤可）" v-model="inputData.step1.work_style">
+                  <label for="formal_1">正社員(夜勤可)</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="formal_2" value="正社員（日勤のみ）" v-model="inputData.step1.work_style">
+                  <label for="formal_2">正社員（日勤のみ）</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="part" value="パート" v-model="inputData.step1.work_style">
+                  <label for="part">パート</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="else" value="その他" v-model="inputData.step1.work_style">
+                  <label for="else">その他</label>
+                </div>
               </div>
-              <div class="group-item">
-                <input type="checkbox" id="formal_2" value="正社員（日勤のみ）" v-model="inputData.step1.work_style">
-                <label for="formal_2">正社員（日勤のみ）</label>
-              </div>
-              <div class="group-item">
-                <input type="checkbox" id="part" value="パート" v-model="inputData.step1.work_style">
-                <label for="part">パート</label>
-              </div>
-              <div class="group-item">
-                <input type="checkbox" id="else" value="その他" v-model="inputData.step1.work_style">
-                <label for="else">その他</label>
-              </div>
-            </div>
 
-            <br>
+              <br>
 
-            <span class="need">必須</span><label for="season"><strong class="input_title">ご希望の転職時期</strong></label>
-            <div class="selectbox">
-              <select name="season" id="" v-model="inputData.step1.season" class="group">
-                <option v-for="season in seasons" :key="season">
-                  {{season}}
-                </option>
-              </select>
-            </div>
-          </div>
-
-          <div v-if="formStep == 2">
-            <span class="need">必須</span><strong class="input_title">現在お持ちの資格</strong>
-            <div class="group">
-              <div class="group-item">
-                <input type="checkbox" id="drive" value="自動車免許" v-model="inputData.step2">
-                <label for="drive">自動車免許</label>
-              </div>
-              <div class="group-item">
-                <input type="checkbox" id="care_worker" value="介護福祉士" v-model="inputData.step2">
-                <label for="care_worker">介護福祉士</label>
-              </div>
-              <div class="group-item">
-                <input type="checkbox" id="begginer" value="初任者研修" v-model="inputData.step2">
-                <label for="begginer">初任者研修</label>
-              </div>
-              <div class="group-item">
-                <input type="checkbox" id="practitioner" value="実務者研修" v-model="inputData.step2">
-                <label for="practitioner">実務者研修</label>
-              </div>
-              <div class="group-item">
-                <input type="checkbox" id="care_manager" value="ケアマネ" v-model="inputData.step2">
-                <label for="care_manager">ケアマネ</label>
-              </div>
-              <div class="group-item">
-                <input type="checkbox" id="social_worker" value="社会福祉士" v-model="inputData.step2">
-                <label for="social_worker">社会福祉士</label>
-              </div>
-              <div class="group-item">
-                <input type="checkbox" id="psychiatric" value="精神保健福祉士" v-model="inputData.step2">
-                <label for="psychiatric">精神保健福祉士</label>
-              </div>
-              <div class="group-item">
-                <input type="checkbox" id="child_minder" value="保育士" v-model="inputData.step2">
-                <label for="child_minder">保育士</label>
-              </div>
-              <div class="group-item">
-                <input type="checkbox" id="else2" value="その他" v-model="inputData.step2">
-                <label for="else2">その他</label>
-              </div>
-              <div class="group-item">
-                <input type="checkbox" id="none2" value="特になし" v-model="inputData.step2">
-                <label for="none2">特になし</label>
-              </div>
-            </div>
-          </div>
-
-          <div v-if="formStep == 3">
-            <span class="need">必須</span><label for="about_job"><strong class="input_title">現在の職務内容</strong></label>
-            <br>
-            <div class="selectbox">
-              <select name="about_job" v-model="inputData.step3.about_job" class="group">
-                <option v-for="job in about_job">
-                  {{job}}
-                </option>
-              </select>
-            </div>
-            <!-- <input type="text" id="about_job" v-model="inputData.step3.about_job"> -->
-            <br><br>
-            <span class="need">必須</span><strong>ご希望の職種</strong>
-            <div class="group">
-              <div class="group-item">
-                <input type="checkbox" id="care_work" value="介護職" v-model="inputData.step3.aspiring">
-                <label for="care_work">介護職</label>
-              </div>
-              <div class="group-item">
-                <input type="checkbox" id="home_visit" value="訪問介護" v-model="inputData.step3.aspiring">
-                <label for="home_visit">訪問介護</label>
-              </div>
-              <div class="group-item">
-                <input type="checkbox" id="responsibility" value="サ責" v-model="inputData.step3.aspiring">
-                <label for="responsibility">サ責</label>
-              </div>
-              <div class="group-item">
-                <input type="checkbox" id="advisor" value="相談役" v-model="inputData.step3.aspiring">
-                <label for="advisor">相談役</label>
-              </div>
-              <div class="group-item">
-                <input type="checkbox" id="manager" value="管理職" v-model="inputData.step3.aspiring">
-                <label for="manager">管理職</label>
-              </div>
-              <div class="group-item">
-                <input type="checkbox" id="else3" value="その他" v-model="inputData.step3.aspiring">
-                <label for="else3">その他</label>
-              </div>
-            </div>
-          </div>
-
-          <div v-if="formStep == 4" class="step4">
-            <span class="need">必須</span><strong class="input_title">お住まい</strong>
-            <br>
-            <div id="prefectures">
-              <select name="prefecture" v-model="inputData.step4.prefecture" class="input_parts"
-                @change="searchCity(inputData.step4.prefecture)">
-                <option value="">都道府県選択</option>
-                <option v-for="(city , index) in citys" :key="index">
-                  {{city.name}}
-                </option>
-              </select>
-              <select name="city" v-model="inputData.step4.city" class="input_parts">
-                <option value="">市町村選択</option>
-                <option v-if="inputData.step4.prefecture" v-for="city in selected_city" :key="selected_city.citycode">
-                  {{city.city}}
-                </option>
-              </select>
-            </div>
-            <br>
-            <br>
-            <span class="need">必須</span><strong class="input_title">基本情報</strong>
-            <br>
-            <div class="text-center">
-              <label for="name">お名前</label><input type="text" id="name" v-model="inputData.step4.info.name"
-                class="text_input">
-            </div>
-            <br>
-            <br>
-            <div class="text-center">
-              <div class="birthday">
-                <label for="birthday">誕生年</label>
-                <select name="birthday" v-model="inputData.step4.info.birthday" class="text_input">
-                  <option v-for="year in birthday">
-                    {{year}}
+              <span class="need">必須</span><label for="season"><strong class="input_title">ご希望の転職時期</strong></label>
+              <div class="selectbox">
+                <select name="season" id="" v-model="inputData.step1.season" class="group">
+                  <option v-for="season in seasons" :key="season">
+                    {{season}}
                   </option>
                 </select>
               </div>
             </div>
-          </div>
 
-          <div v-if="formStep == 5" class="step5">
-            <div class="text-center">
-              <strong class="input_title">ご連絡先</strong>
+
+
+            <div v-if="formStep == 2">
+              <span class="need">必須</span><strong class="input_title">現在お持ちの資格</strong>
+              <div class="group">
+                <div class="group-item">
+                  <input type="checkbox" id="drive" value="自動車免許" v-model="inputData.step2">
+                  <label for="drive">自動車免許</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="care_worker" value="介護福祉士" v-model="inputData.step2">
+                  <label for="care_worker">介護福祉士</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="begginer" value="初任者研修" v-model="inputData.step2">
+                  <label for="begginer">初任者研修</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="practitioner" value="実務者研修" v-model="inputData.step2">
+                  <label for="practitioner">実務者研修</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="care_manager" value="ケアマネ" v-model="inputData.step2">
+                  <label for="care_manager">ケアマネ</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="social_worker" value="社会福祉士" v-model="inputData.step2">
+                  <label for="social_worker">社会福祉士</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="psychiatric" value="精神保健福祉士" v-model="inputData.step2">
+                  <label for="psychiatric">精神保健福祉士</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="child_minder" value="保育士" v-model="inputData.step2">
+                  <label for="child_minder">保育士</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="else2" value="その他" v-model="inputData.step2">
+                  <label for="else2">その他</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="none2" value="特になし" v-model="inputData.step2">
+                  <label for="none2">特になし</label>
+                </div>
+              </div>
             </div>
-            <br>
-            <span class="need">必須</span>
-            <label for="tel">電話番号</label>
-            <br>
-            <input type="tel" id="tel" v-model="inputData.step5.tel" class="text_input">
-            <br>
-            <br>
-            <span class="choose">任意</span>
-            <label for="email">メールアドレス</label>
-            <input type="email" id="email" v-model="inputData.step5.email" class="text_input">
-            <br>
-            <br>
-            <span class="choose">任意</span>
-            <label for="line">LINE ID</label>
-            <input type="text" 　id="line" v-model="inputData.step5.line" class="text_input">
-          </div>
+            <div v-if="formStep == 3">
+              <span class="need">必須</span><label for="about_job"><strong class="input_title">現在の職務内容</strong></label>
+              <br>
+              <div class="selectbox">
+                <select name="about_job" v-model="inputData.step3.about_job" class="group">
+                  <option v-for="job in about_job">
+                    {{job}}
+                  </option>
+                </select>
+              </div>
+              <!-- <input type="text" id="about_job" v-model="inputData.step3.about_job"> -->
+              <br><br>
+              <span class="need">必須</span><strong>ご希望の職種</strong>
+              <div class="group">
+                <div class="group-item">
+                  <input type="checkbox" id="care_work" value="介護職" v-model="inputData.step3.aspiring">
+                  <label for="care_work">介護職</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="home_visit" value="訪問介護" v-model="inputData.step3.aspiring">
+                  <label for="home_visit">訪問介護</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="responsibility" value="サ責" v-model="inputData.step3.aspiring">
+                  <label for="responsibility">サ責</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="advisor" value="相談役" v-model="inputData.step3.aspiring">
+                  <label for="advisor">相談役</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="manager" value="管理職" v-model="inputData.step3.aspiring">
+                  <label for="manager">管理職</label>
+                </div>
+                <div class="group-item">
+                  <input type="checkbox" id="else3" value="その他" v-model="inputData.step3.aspiring">
+                  <label for="else3">その他</label>
+                </div>
+              </div>
+            </div>
+
+            <div v-if="formStep == 4" class="step4">
+              <span class="need">必須</span><strong class="input_title">お住まい</strong>
+              <br>
+              <div id="prefectures">
+                <select name="prefecture" v-model="inputData.step4.prefecture" class="input_parts"
+                  @change="searchCity(inputData.step4.prefecture)">
+                  <option value="">都道府県選択</option>
+                  <option v-for="(city , index) in citys" :key="index">
+                    {{city.name}}
+                  </option>
+                </select>
+                <select name="city" v-model="inputData.step4.city" class="input_parts">
+                  <option value="">市町村選択</option>
+                  <option v-if="inputData.step4.prefecture" v-for="city in selected_city" :key="selected_city.citycode">
+                    {{city.city}}
+                  </option>
+                </select>
+              </div>
+              <br>
+              <br>
+              <span class="need">必須</span><strong class="input_title">基本情報</strong>
+              <br>
+              <div class="text-center">
+                <label for="name">お名前</label><input type="text" id="name" v-model="inputData.step4.info.name"
+                  class="text_input">
+              </div>
+              <br>
+              <br>
+              <div class="text-center">
+                <div class="birthday">
+                  <label for="birthday">誕生年</label>
+                  <select name="birthday" v-model="inputData.step4.info.birthday" class="text_input">
+                    <option v-for="year in birthday">
+                      {{year}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div v-if="formStep == 5" class="step5">
+              <div class="text-center">
+                <strong class="input_title">ご連絡先</strong>
+              </div>
+              <br>
+              <span class="need">必須</span>
+              <label for="tel">電話番号</label>
+              <br>
+              <input type="tel" id="tel" v-model="inputData.step5.tel" class="text_input">
+              <br>
+              <br>
+              <span class="choose">任意</span>
+              <label for="email">メールアドレス</label>
+              <input type="email" id="email" v-model="inputData.step5.email" class="text_input">
+              <br>
+              <br>
+              <span class="choose">任意</span>
+              <label for="line">LINE ID</label>
+              <input type="text" 　id="line" v-model="inputData.step5.line" class="text_input">
+            </div>
+          </transition>
         </div>
 
         <div v-if="formStep < 5" class="form_step_item">
           <span class="step_back" v-if="formStep > 1" @click="changeFormStep(-1)">戻る</span>
           <span class="step" @click="changeFormStep(1)">次のステップへ</span>
         </div>
-        <div v-else class="form_step_item">
-          <button @click="changeFormStep(-1)">戻る</button>
-          <button type="submit" class="final">お仕事探しをスタート！</button>
+
+        <div v-else>
+          <div class="text-center">
+            <small>利用規約に同意して</small>
+          </div>
+
+          <div class="form_step_item">
+            <button @click="changeFormStep(-1)">戻る</button>
+            <button type="submit" class="final">お仕事探しをスタート！</button>
+          </div>
+
         </div>
 
       </form>
