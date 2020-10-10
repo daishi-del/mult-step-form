@@ -64,8 +64,8 @@
 
 
       <!--入力フォーム-->
-      <form action="" method="POST" id="form_wrapper">
-        <ol class="stepBar">
+      <form action="" method="POST" id="form_wrapper" @submit.prevent="postForm">
+        <ol class="stepBar" v-if="formStep < 6">
           <li v-for="n in 5" :key="n" :class="{'visited': n <= formStep}">
             <span>
               {{n}}
@@ -259,7 +259,7 @@
           </transition>
         </div>
         <div class="text-center">
-          <ul style="color: red;">
+          <ul class="error">
             <li v-for="error in errors">
               {{error}}
             </li>
@@ -271,16 +271,24 @@
           <span class="step" @click="validation()">次のステップへ</span>
         </div>
 
-        <div v-else>
+        <div v-if="formStep == 5">
           <div class="text-center">
             <small>利用規約に同意して</small>
           </div>
 
           <div class="form_step_item">
-            <button @click="changeFormStep(-1)">戻る</button>
+            <span @click="changeFormStep(-1)" class="step_back">戻る</span>
             <button type="submit" class="final">お仕事探しをスタート！</button>
           </div>
 
+        </div>
+
+        <div v-if="formStep == 6" id="thanks" class="text-center">
+          <p>
+            ありがとうございます
+            <br>
+            担当者からの連絡をお待ちください。
+          </p>
         </div>
 
       </form>
@@ -290,12 +298,6 @@
 
       <!--フッター-->
       <footer>
-        <!--
-          先頭に移行しました 
-          <div id="app"> 
-        -->
-
-
         <div id="wrapper">
           <!--会社概要　-->
           <button id="modal-open-btn" @click.prevent.stop="openModal1">
@@ -470,6 +472,8 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
   <script src="./city_data.js"></script>
   <script>
     function createApp() {
@@ -559,8 +563,6 @@
           },
           validation() {
             this.errors = []
-
-            console.log(this.formStep)
             if (this.formStep == 1) {
               if (this.inputData.step1.work_style.length == 0) {
                 this.errors.push("ご希望の働き方を選択してください")
@@ -615,15 +617,24 @@
                 return false
               }
             }
-
-
+          },
+          postForm() {
+            // 変数urlに送信先のurlを指定してください
+            const url = null
+            if (url) {
+              axios.post(url, inputData).then((res) => {
+                console.log(res)
+                this.changeFormStep(1)
+              })
+            }
+            else {
+              console.log(this.inputData)
+              this.changeFormStep(1)
+            }
           },
           searchCity(prefecture) {
-            console.log(prefecture)
             Object.keys(this.citys).forEach((item, index) => {
-              console.log(item)
               if (citys[item].name == prefecture) {
-                console.log(citys[item].city)
                 this.selected_city = citys[item].city
               }
             })
@@ -652,8 +663,6 @@
               _this.closeModal1()
             }
           })
-
-          console.log(citys)
           this.citys = citys
         }
       })
