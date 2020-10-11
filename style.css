@@ -6,20 +6,121 @@ body {
   font-size: 14px;
   line-height: 1.5;
   background: white;
+  margin: 0;
+}
+/*ヘッダー部分*/
+#wrapper1, header, .footer {
+        width: 50%;
+        margin: 0 25%;
+    }
+
+header {
+    display: flex;
+}
+h1 {
+    width: 30%;
+    margin-bottom: 0;
+}
+#header-img {
+    width: 100%;
+}
+#head {
+    display: flex;
+    margin-left: 20%;
+}
+.header {
+    width: 100%;
+    height: auto;
+}
+.header1 {
+    width: 30%;
+    height: 80%;
+}
+/*メイン*/
+#back {
+    background-image: url(image/sp_top03.png);
+    background-size: 100% 100%;
+    padding: 30px ;
+}
+h2 {
+    color: #ff60ad;
+    text-shadow: white 2px 2px 0, white -2px -2px 0, white -2px 2px 0, white 2px -2px 0, white 0px 2px 0, white 0px -2px 0, white -2px 0px 0, white 2px 0px 0;
 }
 
+#list {
+    width: 60%;
+    display: block;
+    background-color: white;
+    padding: 0;
+    border-radius: 20px;
+}
+.big {
+    font-weight: bold;
+}
+.list {
+    color: #ff60ad;
+    padding-right: 3px;
+}
+
+.list-text {
+    margin: 0;
+    padding: 10px;
+    border-bottom: 1px solid #ff60ad;
+}
+.list-text:last-child {
+    border-bottom: none;
+}
+#to-roku {
+    display: flex;
+    background-color: #ff60ab;
+}
+#content {
+    display: flex;
+    width: 60%;
+    margin: 5px 20%;
+    text-align: center;
+}
+.border {
+    width: 20%;
+   padding: 3px;
+    color: white;
+    display: block;
+    border-radius: 8px;
+    border: 2px solid white;
+    margin: 0;
+}
+.content1 {
+    margin: 0;
+    width: 80%;
+    color: white;
+    text-align: center;
+    padding: 3px;
+    font-weight: bold;
+}
+#content2 {
+    border-bottom: 2px solid #ff60ab;
+}
+.content2 {
+    margin: 0;
+    text-align: center;
+    color: #ff60ab;
+    font-weight: bold;
+    padding: 2px;
+}
+footer {
+    margin: 0;
+}
+
+/*モーダル*/
 *:focus {
   outline: none !important;
 }
 
 #wrapper {
   padding: 10px 0;
-}
+  height: 40px;
+  width: 100%;
 
-#modal-open-btn {
-  margin: 5px;
-  background-color: white;
-  border: none;
 }
 
 .modal-overlay {
@@ -64,17 +165,13 @@ body {
   padding: 40px 30px;
 }
 
-@media screen and (min-width: 768px) {
+
   body {
     font-size: 16px;
     padding: 0 30px;
   }
 
-  #wrapper {
-    max-width: 900px;
-    margin: 0;
-    padding: 30px 0;
-  }
+  
   .modal-content {
     margin-top: 20px;
   }
@@ -91,16 +188,69 @@ body {
     cursor: pointer;
     float: left;
   }
+button {
+    width: 30%;
+}
   .footer {
     color: gray;
     font-size: smaller;
     text-align: center;
   }
+@media screen and (max-width: 1025px) {
+    #wrapper1, header, .footer {
+        width: 70%;
+        margin: 0 15%;
+    }
 }
-@media screen and (max-width: 376px) {
+
+
+@media screen and (max-width: 540px) {
   body {
     overflow-x: hidden !important;
+    padding: 0;
   }
+#wrapper1, header, .footer {
+        width: 100%;
+        margin: 0;
+    }
+    .header {
+        font-size: 11px;
+        font-weight: bold;
+    }
+    h1 {
+        width: 40%;
+        margin-top: 15px;
+    }
+    #head {
+    margin-left: 10%;
+}
+    .header1 {
+        height: 80%;
+    }
+    h2 {
+        font-size: 17px;
+    }
+    #back {
+        padding: 15px;
+    }
+    #list {
+        font-size: 11px;
+        width: 65%;
+    }
+    #content {
+        width: 80%;
+        margin: 5px 12%;
+    }
+    .content2 {
+        font-size: 15px;
+    }
+    button {
+        font-size: 10px;
+    }
+    #wrapper {
+        padding-bottom: 0;
+    }
+    
   .step,
   .step_back {
     font-size: 1rem;
@@ -108,6 +258,7 @@ body {
   .final {
     font-size: 0.8rem !important;
   }
+    
 }
 
 .fade-enter-active,
