@@ -665,6 +665,10 @@
             const target = event.target.closest("#modal")
             if (_this.isOpenModal1 && target == null) {
               _this.closeModal1()
+            } else if (_this.isOpenModal2 && target == null) {
+              _this.closeModal2()
+            } else if (_this.isOpenModal3 && target == null) {
+              _this.closeModal3()
             }
           })
           this.citys = citys
