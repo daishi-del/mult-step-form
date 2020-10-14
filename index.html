@@ -31,13 +31,13 @@
       <!--メイン部分-->
       <div id="main">
         <div id="back">
-        <h2>
-          業界専門のコンサルタントと<br>
-          地域密着ならではの情報量で<br>
-          納得感のある転職を。
-        </h2>
+          <h2>
+            業界専門のコンサルタントと<br>
+            地域密着ならではの情報量で<br>
+            納得感のある転職を。
+          </h2>
 
-        <div id="list">
+          <div id="list">
             <p class="list-text"><span class="list">✔︎</span>ご利用は<span class="big">すべて無料</span></p>
 
             <p class="list-text"><span class="list">✔︎</span>豊富なハローワーク日掲載求人</p>
@@ -45,17 +45,17 @@
             <p class="list-text"><span class="list">✔︎</span>高給与・高待遇求人多数！</p>
 
             <p class="list-text"><span class="list">✔︎</span>介護有資格者限定求人も！</p>
-        </div>
+          </div>
         </div>
 
         <!--下部の文字2行-->
 
         <div id="to-roku">
-        <div id="content">
-          <p class="border">無料</p>
-          <p class="content1">かんたん登録</p>
-          <p class="border">60秒</p>
-        </div>
+          <div id="content">
+            <p class="border">無料</p>
+            <p class="content1">かんたん登録</p>
+            <p class="border">60秒</p>
+          </div>
         </div>
 
         <div id="content2">
@@ -68,35 +68,25 @@
 
 
       <!--入力フォーム-->
-      <form action="" method="POST" id="form_wrapper" @submit.prevent="postForm">
-        <ol class="stepBar" v-if="formStep < 6">
-          <li v-for="n in 5" :key="n" :class="{'visited': n <= formStep}">
-            <span>
-              {{n}}
-            </span>
-          </li>
-
+      <form action="" method="POST" id="form_wrapper">
+        <div class="text-center">
+          <ol class="stepBar" v-if="formStep < 6">
+            <li v-for="n in 5" :key="n" :class="{'visited': n <= formStep}">
+              <span>
+                {{n}}
+              </span>
+            </li>
+        </div>
         </ol>
+
         <div class="form-content">
-          <transition name="fade" mode="out-in">
-            <div v-if="formStep == 1">
+          <transition :name="direction" mode="out-in">
+            <div v-if="formStep == 1" key="step1">
               <span class="need">必須</span><strong class="input_title">ご希望の働き方</strong>
               <div class="group">
-                <div class="group-item">
-                  <input type="checkbox" id="formal_1" value="正社員（夜勤可）" v-model="inputData.step1.work_style">
-                  <label for="formal_1">正社員(夜勤可)</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="formal_2" value="正社員（日勤のみ）" v-model="inputData.step1.work_style">
-                  <label for="formal_2">正社員（日勤のみ）</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="part" value="パート" v-model="inputData.step1.work_style">
-                  <label for="part">パート</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="else" value="その他" v-model="inputData.step1.work_style">
-                  <label for="else">その他</label>
+                <div class="group-item" v-for="step1 in formList.step1" @click.stop="addFromData(step1 , 'step1')">
+                  <input type="checkbox" :value="step1" v-model="inputData.step1.work_style">
+                  <label for="part">{{step1}}</label>
                 </div>
               </div>
 
@@ -111,55 +101,17 @@
                 </select>
               </div>
             </div>
-
-
-
-            <div v-if="formStep == 2">
+            <div v-if="formStep == 2" key="step2">
               <span class="need">必須</span><strong class="input_title">現在お持ちの資格</strong>
+
               <div class="group">
-                <div class="group-item">
-                  <input type="checkbox" id="drive" value="自動車免許" v-model="inputData.step2">
-                  <label for="drive">自動車免許</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="care_worker" value="介護福祉士" v-model="inputData.step2">
-                  <label for="care_worker">介護福祉士</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="begginer" value="初任者研修" v-model="inputData.step2">
-                  <label for="begginer">初任者研修</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="practitioner" value="実務者研修" v-model="inputData.step2">
-                  <label for="practitioner">実務者研修</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="care_manager" value="ケアマネ" v-model="inputData.step2">
-                  <label for="care_manager">ケアマネ</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="social_worker" value="社会福祉士" v-model="inputData.step2">
-                  <label for="social_worker">社会福祉士</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="psychiatric" value="精神保健福祉士" v-model="inputData.step2">
-                  <label for="psychiatric">精神保健福祉士</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="child_minder" value="保育士" v-model="inputData.step2">
-                  <label for="child_minder">保育士</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="else2" value="その他" v-model="inputData.step2">
-                  <label for="else2">その他</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="none2" value="特になし" v-model="inputData.step2">
-                  <label for="none2">特になし</label>
+                <div class="group-item" v-for="step2 in formList.step2" @click.stop="addFromData(step2 , 'step2')">
+                  <input type="checkbox" :value="step2" v-model="inputData.step2">
+                  <label for="part">{{step2}}</label>
                 </div>
               </div>
             </div>
-            <div v-if="formStep == 3">
+            <div v-if="formStep == 3" key="step3">
               <span class="need">必須</span><label for="about_job"><strong class="input_title">現在の職務内容</strong></label>
               <br>
               <div class="selectbox">
@@ -172,35 +124,40 @@
               <!-- <input type="text" id="about_job" v-model="inputData.step3.about_job"> -->
               <br><br>
               <span class="need">必須</span><strong>ご希望の職種</strong>
+              <!-- <div class="group">
+                    <div class="group-item">
+                      <input type="checkbox" id="care_work" value="介護職" v-model="inputData.step3.aspiring">
+                      <label for="care_work">介護職</label>
+                    </div>
+                    <div class="group-item">
+                      <input type="checkbox" id="home_visit" value="訪問介護" v-model="inputData.step3.aspiring">
+                      <label for="home_visit">訪問介護</label>
+                    </div>
+                    <div class="group-item">
+                      <input type="checkbox" id="responsibility" value="サ責" v-model="inputData.step3.aspiring">
+                      <label for="responsibility">サ責</label>
+                    </div>
+                    <div class="group-item">
+                      <input type="checkbox" id="advisor" value="相談役" v-model="inputData.step3.aspiring">
+                      <label for="advisor">相談役</label>
+                    </div>
+                    <div class="group-item">
+                      <input type="checkbox" id="manager" value="管理職" v-model="inputData.step3.aspiring">
+                      <label for="manager">管理職</label>
+                    </div>
+                    <div class="group-item">
+                      <input type="checkbox" id="else3" value="その他" v-model="inputData.step3.aspiring">
+                      <label for="else3">その他</label>
+                    </div>
+                  </div> -->
               <div class="group">
-                <div class="group-item">
-                  <input type="checkbox" id="care_work" value="介護職" v-model="inputData.step3.aspiring">
-                  <label for="care_work">介護職</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="home_visit" value="訪問介護" v-model="inputData.step3.aspiring">
-                  <label for="home_visit">訪問介護</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="responsibility" value="サ責" v-model="inputData.step3.aspiring">
-                  <label for="responsibility">サ責</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="advisor" value="相談役" v-model="inputData.step3.aspiring">
-                  <label for="advisor">相談役</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="manager" value="管理職" v-model="inputData.step3.aspiring">
-                  <label for="manager">管理職</label>
-                </div>
-                <div class="group-item">
-                  <input type="checkbox" id="else3" value="その他" v-model="inputData.step3.aspiring">
-                  <label for="else3">その他</label>
+                <div class="group-item" v-for="step3 in formList.step3" @click.stop="addFromData(step3 , 'step3')">
+                  <input type="checkbox" :value="step3" v-model="inputData.step3.aspiring">
+                  <label for="part">{{step3}}</label>
                 </div>
               </div>
             </div>
-
-            <div v-if="formStep == 4" class="step4">
+            <div v-if="formStep == 4" class="step4" key="step4">
               <span class="need">必須</span><strong class="input_title">お住まい</strong>
               <br>
               <div id="prefectures">
@@ -239,8 +196,7 @@
                 </div>
               </div>
             </div>
-
-            <div v-if="formStep == 5" class="step5">
+            <div v-if="formStep == 5" class="step5" key="step5">
               <div class="text-center">
                 <strong class="input_title">ご連絡先</strong>
               </div>
@@ -262,6 +218,7 @@
             </div>
           </transition>
         </div>
+
         <div class="text-center">
           <ul class="error">
             <li v-for="error in errors">
@@ -280,9 +237,11 @@
             <small>利用規約に同意して</small>
           </div>
 
-          <div class="form_step_item">
-            <span @click="changeFormStep(-1)" class="step_back">戻る</span>
-            <button type="submit" class="final">お仕事探しをスタート！</button>
+          <div class="form_step_item check_item">
+            <small @click="changeFormStep(-1)" class="check_back">戻る</small>
+            <span type="submit" class="final" @click="postForm">
+              お仕事探しをスタート！
+            </span>
           </div>
 
         </div>
@@ -468,10 +427,10 @@
         </div>
         <p class="footer">Comrise,Co.Ltd</p>
 
-        </footer>
-    
+      </footer>
 
-      </div>
+
+    </div>
     <!--フッターend-->
   </div>
 
@@ -484,6 +443,35 @@
       new Vue({
         el: "#app",
         data: {
+          direction: "",
+          formList: {
+            step1: [
+              "正社員(夜勤可)",
+              "正社員（日勤のみ）",
+              "パート",
+              "その他"
+            ],
+            step2: [
+              "自動車免許",
+              "介護福祉士",
+              "初任者研修",
+              "実務者研修",
+              "ケアマネ",
+              "社会福祉士",
+              "精神保健福祉士",
+              "保育士",
+              "その他",
+              "特になし"
+            ],
+            step3: [
+              "介護職",
+              "訪問介護",
+              "サ責",
+              "相談役",
+              "管理職",
+              "その他"
+            ]
+          },
           errors: [],
           seasons: [
             "良い求人があり次第",
@@ -562,8 +550,55 @@
           },
           // 追加分
           changeFormStep(value) {
+            if (value < 0) {
+              this.direction = "right"
+            } else {
+              this.direction = "left"
+            }
             this.formStep += value
             this.errors = []
+          },
+          addFromData(val, target) {
+            if (target == 'step1') {
+              let step1 = this.inputData.step1.work_style
+              let isContent = false
+              step1.forEach((item, index) => {
+                if (val == item) {
+                  step1.splice(index, 1)
+                  isContent = true
+                }
+              })
+              if (!isContent) {
+                step1.push(val)
+              }
+            }
+            if (target == 'step2') {
+              let step2 = this.inputData.step2
+              let isContent = false
+              step2.forEach((item, index) => {
+                if (val == item) {
+                  step2.splice(index, 1)
+                  isContent = true
+                }
+              })
+              if (!isContent) {
+                step2.push(val)
+              }
+            }
+
+            if (target == 'step3') {
+              let step3 = this.inputData.step3.aspiring
+              let isContent = false
+              step3.forEach((item, index) => {
+                if (val == item) {
+                  step3.splice(index, 1)
+                  isContent = true
+                }
+              })
+              if (!isContent) {
+                step3.push(val)
+              }
+            }
           },
           validation() {
             this.errors = []
