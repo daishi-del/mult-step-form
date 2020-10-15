@@ -69,16 +69,20 @@
 
       <!--入力フォーム-->
       <form action="" method="POST" id="form_wrapper">
-        <div class="text-center">
+        <div>
+          <div class="stepbar_label">
+            <span>
+              STEP
+            </span>
+          </div>
           <ol class="stepBar" v-if="formStep < 6">
             <li v-for="n in 5" :key="n" :class="{'visited': n <= formStep}">
               <span>
                 {{n}}
               </span>
             </li>
+          </ol>
         </div>
-        </ol>
-
         <div class="form-content">
           <transition :name="direction" mode="out-in">
             <div v-if="formStep == 1" key="step1">
