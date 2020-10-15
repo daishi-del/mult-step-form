@@ -267,6 +267,11 @@ button {
   .final {
     font-size: 0.8rem !important;
   }
+  .stepbar_label {
+    float: left;
+    left: 3% !important;
+    position: relative;
+  }
 }
 
 .fade-enter-active,
@@ -279,7 +284,6 @@ button {
 .fade-leave-to {
   opacity: 0;
 }
-
 
 .left-enter-active {
   animation: leftInAnimation 0.4s ease-in-out;
