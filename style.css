@@ -111,6 +111,7 @@ h2 {
   font-weight: bold;
   padding: 2px;
 }
+.stepbar_label span { color: #ff60ab; }
 footer {
   margin: 0;
 }
@@ -208,6 +209,7 @@ button {
     float: left;
     left: 7% !important;
     position: relative;
+    
   }
 }
 
@@ -271,6 +273,7 @@ button {
     float: left;
     left: 3% !important;
     position: relative;
+    color: 
   }
 }
 
@@ -342,6 +345,7 @@ button {
   float: left;
   position: relative;
   left: 10%;
+    color: #ff60ab;
 }
 @media screen and (max-width: 1000px) {
   .stepbar_label {
