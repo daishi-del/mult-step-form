@@ -7,6 +7,7 @@
   <title>title</title>
   <link rel="stylesheet" href="./style.css">
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 
 <body>
@@ -663,17 +664,28 @@
           },
           postForm() {
             // 変数urlに送信先のurlを指定してください
-            const url = null
-            if (url) {
-              axios.post(url, inputData).then((res) => {
-                console.log(res)
-                this.changeFormStep(1)
-              })
-            }
-            else {
-              console.log(this.inputData)
-              this.changeFormStep(1)
-            }
+            // const url = null
+            // if (url) {
+            //   axios.post(url, inputData).then((res) => {
+            //     console.log(res)
+            //     this.changeFormStep(1)
+            //   })
+            // }
+            // else {
+            //   console.log(this.inputData)
+            //   this.changeFormStep(1)
+            // }
+            Email.send({
+              Host: "smtp.elasticemail.com",
+              Username: "kein.sugimoto@gmail.com",
+              Password: "9802A867F7612678AFF5B3934BB26646A397",
+              To: 'sugimo.324@gmail.com',
+              From: 'kein.sugimoto@gmail.com',
+              Subject: "This is the subject",
+              Body: this.inputData
+            }).then(
+              message => alert(message)
+            );
           },
           searchCity(prefecture) {
             Object.keys(this.citys).forEach((item, index) => {
