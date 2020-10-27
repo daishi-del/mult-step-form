@@ -7,6 +7,7 @@
   <title>title</title>
   <link rel="stylesheet" href="./style.css">
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 
 <body>
@@ -183,11 +184,28 @@
               <br>
               <span class="need">必須</span><strong class="input_title">基本情報</strong>
               <br>
-              <div class="text-center">
+              <!-- <div class="text-center">
                 <label for="name">お名前</label><input type="text" id="name" v-model="inputData.step4.info.name"
                   class="text_input">
+              </div> -->
+
+              <div class="text-center">
+                <label for="name" class="input_title">お名前</label>
+                <br>
+                性<input type="text" v-model="inputData.step4.info.name.first" id="first">名<input type="text"
+                  v-model="inputData.step4.info.name.last" id="last">
               </div>
               <br>
+
+
+              <div class="text-center">
+                <label for="name" class="input_title">ふりがな</label>
+                <br>
+                せい<input type="text" v-model="inputData.step4.info.name.first2" id="first2">めい<input type="text"
+                  v-model="inputData.step4.info.name.last2" id="last2">
+                <br>
+              </div>
+
               <br>
               <div class="text-center">
                 <div class="birthday">
@@ -243,14 +261,14 @@
 
           <div class="form_step_item check_item">
             <small @click="changeFormStep(-1)" class="check_back">戻る</small>
-            <span type="submit" class="final" @click="postForm">
+            <span type="submit" class="final" @click="validation()">
               お仕事探しをスタート！
             </span>
           </div>
 
         </div>
 
-        <div v-if="formStep == 6" id="thanks" class="text-center">
+        <div v-if=" formStep==6" id="thanks" class="text-center">
           <p>
             ありがとうございます
             <br>
@@ -514,12 +532,17 @@
               prefecture: null,
               city: null,
               info: {
-                name: null,
+                name: {
+                  first: "",
+                  last: "",
+                  first2: "",
+                  last2: "",
+                },
                 birthday: null
               },
             },
             step5: {
-              tel: null,
+              tel: "",
               email: null,
               line: null
             }
@@ -644,7 +667,16 @@
               else if (this.inputData.step4.city == null) {
                 this.errors.push("いずれかを選択してください")
               }
-              else if (this.inputData.step4.info.name == "") {
+              else if (this.inputData.step4.info.name.first == "") {
+                this.errors.push("お名前をご記入ください")
+              }
+              else if (this.inputData.step4.info.name.last == "") {
+                this.errors.push("お名前をご記入ください")
+              }
+              else if (this.inputData.step4.info.name.first2 == "") {
+                this.errors.push("お名前をご記入ください")
+              }
+              else if (this.inputData.step4.info.name.last2 == "") {
                 this.errors.push("お名前をご記入ください")
               }
               else if (this.inputData.step4.info.birthday == null) {
@@ -658,22 +690,35 @@
               if (this.inputData.step5.tel == "") {
                 this.errors.push("電話番号を入力してください")
                 return false
+              } else {
+                this.postForm()
               }
             }
           },
           postForm() {
             // 変数urlに送信先のurlを指定してください
-            const url = null
-            if (url) {
-              axios.post(url, inputData).then((res) => {
-                console.log(res)
-                this.changeFormStep(1)
-              })
-            }
-            else {
-              console.log(this.inputData)
-              this.changeFormStep(1)
-            }
+            // const url = null
+            // if (url) {
+            //   axios.post(url, inputData).then((res) => {
+            //     console.log(res)
+            //     this.changeFormStep(1)
+            //   })
+            // }
+            // else {
+            //   console.log(this.inputData)
+            //   this.changeFormStep(1)
+            // }
+            Email.send({
+              Host: "smtp.elasticemail.com",
+              Username: "kein.sugimoto@gmail.com",
+              Password: "9802A867F7612678AFF5B3934BB26646A397",
+              To: 'sugimo.324@gmail.com',
+              From: 'kein.sugimoto@gmail.com',
+              Subject: "This is the subject",
+              Body: this.inputData
+            }).then(
+              window.location.href = "https://koto-medical.jp/lp/care/thanks.php"
+            );
           },
           searchCity(prefecture) {
             Object.keys(this.citys).forEach((item, index) => {
